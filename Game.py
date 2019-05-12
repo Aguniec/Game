@@ -29,8 +29,42 @@ class Creature:
 
 
 class Goblin (Creature):
-    class_name = "goblin"
-    descryption = "A big, green creature"
+    def __init__(self, name):
+        self.class_name = "goblin"
+        self._descryption = "A big, green creature"
+        self.health = 3
+        super().__init__(name)
+    
+    @property
+    def descryption(self):
+        if self.health >=3:
+            return self._descryption
+        elif self.health == 2:
+            healh_status = "It's arm has been cut off"
+        elif self.health == 1:
+            healh_status = "It lost its leg"
+        elif self.health <= 0:
+            healh_status = "It's dead"
+        return self._descryption + "\n" + healh_status
+    
+    @descryption.setter
+    def descryption (self, value):
+        self._descryption = value
+
+def hit(noun):
+    if noun in Creature.objects:
+        thing = Creature.objects[noun]
+        if type(thing) == Goblin:
+            thing.health = thing.health - 1
+            if thing.health <=0:
+                msg = "You killed the goblin"
+            else:
+                msg = "You hit the {}".format(thing.class_name)
+        else:
+            msg = "There is no {} here".format(noun)
+    return msg
+
+
 
 
 def examine(noun):
@@ -44,11 +78,13 @@ def say(noun):
 
 verb_dict = {
     "say" : say,
-    "examine" : examine
+    "examine" : examine,
+    "hit" : hit
 }
 
 
 goblin = Goblin("Gooby")
+
 
 
 while True:
