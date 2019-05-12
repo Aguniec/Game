@@ -1,4 +1,4 @@
-class Printed:
+class Superclass:
     def get_input():
         command = input(":").split()
         verb_word = command[0]
@@ -51,35 +51,46 @@ class Goblin (Creature):
     def descryption (self, value):
         self._descryption = value
 
-def hit(noun):
-    if noun in Creature.objects:
-        thing = Creature.objects[noun]
-        if type(thing) == Goblin:
-            thing.health = thing.health - 1
-            if thing.health <=0:
-                msg = "You killed the goblin"
+
+class Human(Creature):
+    def __init__(self, value):
+        self.class_name = "human"
+        self._descryption = "Regular human"
+        super().__init__(name)
+
+    @property
+    def descryption(self):
+        return self._descryption
+
+
+class Interactions:
+    def hit(noun):
+        if noun in Creature.objects:
+            thing = Creature.objects[noun]
+            if type(thing) == Goblin:
+                thing.health = thing.health - 1
+                if thing.health <=0:
+                    msg = "You killed the goblin"
+                else:
+                    msg = "You hit the {}".format(thing.class_name)
             else:
-                msg = "You hit the {}".format(thing.class_name)
+                msg = "There is no {} here".format(noun)
+        return msg
+
+    def examine(noun):
+        if noun in Creature.objects:
+            return Creature.objects[noun].get_descryption()
         else:
-            msg = "There is no {} here".format(noun)
-    return msg
+            return "There is no {} here".format(noun)
 
+    def say(noun):
+        return "You said {}".format(noun)
 
-
-
-def examine(noun):
-    if noun in Creature.objects:
-        return Creature.objects[noun].get_descryption()
-    else:
-        return "There is no {} here".format(noun)
-
-def say(noun):
-    return "You said {}".format(noun)
 
 verb_dict = {
-    "say" : say,
-    "examine" : examine,
-    "hit" : hit
+    "say" : Interactions.say,
+    "examine" : Interactions.examine,
+    "hit" : Interactions.hit
 }
 
 
@@ -88,5 +99,5 @@ goblin = Goblin("Gooby")
 
 
 while True:
-    Printed.get_input()
+    Superclass.get_input()
 
