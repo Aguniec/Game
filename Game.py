@@ -1,18 +1,3 @@
-class Superclass:
-    def get_input():
-        command = input(":").split()
-        verb_word = command[0]
-        if verb_word in verb_dict:
-            verb = verb_dict[verb_word]
-        else:
-            print("Unknown verb {}".format(verb_word))
-            return
-        
-        if len(command) >=2:
-            noun_word = command[1]
-            print (verb(noun_word))
-        else:
-            print(verb("nothing"))
 
 
 class Creature:
@@ -50,17 +35,6 @@ class Goblin (Creature):
     @descryption.setter
     def descryption (self, value):
         self._descryption = value
-
-
-class Human(Creature):
-    def __init__(self, value):
-        self.class_name = "human"
-        self._descryption = "Regular human"
-        super().__init__(name)
-
-    @property
-    def descryption(self):
-        return self._descryption
 
 
 class Interactions:
