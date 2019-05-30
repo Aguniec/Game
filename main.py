@@ -1,5 +1,5 @@
 from Interactions.interactions import MainInteractions
-from Creatures.creatures import Goblin, Human
+from Creatures.creatures import Creature, Goblin, Human
 
 
 class UserInterface:
@@ -36,7 +36,10 @@ goblin = Goblin("Gooby")
 human = Human("Steve")
 
 
+
 #UserInterface.get_name()
+
+
 
 while True:
 

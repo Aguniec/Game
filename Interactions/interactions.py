@@ -1,12 +1,15 @@
 from Creatures.creatures import Creature, Goblin, Human
 
+
 class MainInteractions:
 
     def hit(noun):
         if noun in Creature.objects:
             thing = Creature.objects[noun]
+
             if type(thing) == Goblin or Human:
                 thing.health = thing.health - 1
+
                 if thing.health <= 0:
                     msg = "You killed the {}".format(thing.class_name)
                 else:
