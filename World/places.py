@@ -1,5 +1,7 @@
-from Creatures.creatures_new import Goblin, Ogre
+from Creatures.creatures_new import Enemy, Goblin, Ogre
 from Items.items import Knife
+import World.places, Interactions.interactions_new, World.world
+
 
 
 class MapPlace:
